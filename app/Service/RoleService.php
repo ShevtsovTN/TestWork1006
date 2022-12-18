@@ -41,6 +41,9 @@ class RoleService
         if ($this->isAttachable($user, $roleValue)) {
             throw new Exception('User don`t have this role.', 400);
         }
+        if (!$this->isDetachable($user)) {
+            throw new Exception('The user must have at least one role.', 400);
+        }
         DB::beginTransaction();
         try {
             $role = Role::query()->where('role', $roleValue)->first();
@@ -58,5 +61,10 @@ class RoleService
     protected function isAttachable(User $user, string $role): bool
     {
         return !in_array($role, data_get($user->roles, '*.role'));
+    }
+
+    protected function isDetachable(User $user): bool
+    {
+        return $user->roles()->count() > 1;
     }
 }

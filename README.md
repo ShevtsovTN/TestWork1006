@@ -30,3 +30,9 @@
 - Настроить jwt согласно https://laravel-jwt-auth.readthedocs.io/en/latest/, например `php artisan jwt:secret` и `php artisan jwt:generate-certs`
 - Выполнить `php artisan migrate:fresh --seed`, команда запустит миграции и заполнит тестовую БД данными.
 - Посмотреть пользователей можно через `php artisan tinker`, для всех пользователей пароль `password`.
+
+## Info
+
+Если запустить маршрут "Get Users" можно просмотреть всех пользователей, 
+данная операция также установит переменную user_id в значение пользователя с ролью "reader", 
+что позволит тестировать в Postman добавление/удаление ролей.
