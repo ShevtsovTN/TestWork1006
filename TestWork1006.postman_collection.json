@@ -184,11 +184,12 @@
 									"const jsonData = JSON.parse(responseBody);",
 									"for(const item of jsonData) {",
 									"    for(const elem of item.roles) {",
-									"        if (elem.role === 'administartor') {",
+									"        if (elem.role === 'administrator') {",
 									"            postman.setEnvironmentVariable(\"admin_email\", item.email);",
 									"        }",
 									"        if (elem.role === 'reader') {",
 									"            postman.setEnvironmentVariable(\"user_id\", item.id);",
+									"            postman.setEnvironmentVariable(\"reader_email\", item.email);",
 									"        }",
 									"    }",
 									"};"
