@@ -11,7 +11,7 @@ class PostPolicy
 
     public function create(User $user): bool
     {
-        return $user->roles == Role::ROLE_WRITER;
+        return $this->checkRole(Role::ROLE_WRITER, $user);
     }
 
     public function update(User $user, Post $post): bool
@@ -25,6 +25,11 @@ class PostPolicy
     }
     protected function getEditor(User $user): bool
     {
-        return $user->roles == Role::ROLE_ADMINISTRATOR || $user->roles == Role::ROLE_MODERATOR;
+        return $this->checkRole(Role::ROLE_ADMINISTRATOR, $user) || $this->checkRole(Role::ROLE_MODERATOR, $user);
+    }
+
+    protected function checkRole(string $role, User $user): bool
+    {
+        return in_array($role, data_get($user->roles, '*.role'));
     }
 }

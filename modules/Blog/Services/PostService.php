@@ -4,8 +4,6 @@ namespace Modules\Blog\Services;
 
 use App\Models\User;
 use Exception;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Modules\Blog\Models\Post;
 
@@ -23,7 +21,8 @@ class PostService
     {
         DB::beginTransaction();
         try {
-            $author = User::query()->find(Auth::id());
+            /** @var User $author */
+            $author = auth()->user();
 
             /** @var Post $post */
             $post = $author->posts()->create($validated);

@@ -48,6 +48,7 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $createPostRequest): PostResource
     {
+        $this->authorize('create', Post::class);
         return PostResource::make($this->service->create($createPostRequest->validated()));
     }
 
@@ -59,6 +60,7 @@ class PostController extends Controller
      */
     public function update(Post $post, UpdatePostRequest $updatePostRequest): PostResource
     {
+        $this->authorize('update', $post);
         return PostResource::make($this->service->update($post, $updatePostRequest->validated()));
     }
 
@@ -69,6 +71,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post): PostResource
     {
+        $this->authorize('delete', $post);
         return PostResource::make($this->service->delete($post));
     }
 }
