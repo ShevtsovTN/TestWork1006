@@ -31,7 +31,7 @@
 							"formdata": [
 								{
 									"key": "email",
-									"value": "thompson.viola@example.net",
+									"value": "{{admin_email}}",
 									"type": "text"
 								},
 								{
@@ -184,9 +184,11 @@
 									"const jsonData = JSON.parse(responseBody);",
 									"for(const item of jsonData) {",
 									"    for(const elem of item.roles) {",
+									"        if (elem.role === 'administartor') {",
+									"            postman.setEnvironmentVariable(\"admin_email\", item.email);",
+									"        }",
 									"        if (elem.role === 'reader') {",
 									"            postman.setEnvironmentVariable(\"user_id\", item.id);",
-									"            break;",
 									"        }",
 									"    }",
 									"};"
@@ -195,9 +197,16 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"url": {
 							"raw": "http://127.0.0.1:8000/api/users",
 							"protocol": "http",
