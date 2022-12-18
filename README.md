@@ -25,7 +25,8 @@
 
 ## Running Project
 
-- Клонировать проект с репозитория github.
+- Клонировать проект с репозитория github `git clone https://github.com/ShevtsovTN/TestWork1006.git`.
 - Перейти в проект и выполнить `./vendor/bin/sail up`, команда создаст и запустит образы Docker.
+- Настроить jwt согласно https://laravel-jwt-auth.readthedocs.io/en/latest/, например `php artisan jwt:secret` и `php artisan jwt:generate-certs`
 - Выполнить `php artisan migrate:fresh --seed`, команда запустит миграции и заполнит тестовую БД данными.
-- Посмотреть пользователей можно через `php artisan tinker` или через настройку к БД, пароль `password`.
+- Посмотреть пользователей можно через `php artisan tinker`, для всех пользователей пароль `password`.
